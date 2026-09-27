@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Freshers Sports Registration 2026</title>
+<style>
+:root{
+ --bg:#07090d;--panel:#0d121a;--panel2:#111822;--line:#202a38;
+ --text:#f4f5f7;--muted:#8f9aaa;--red:#ff3038;--red2:#ff5960;
+ --gold:#ffb31a;--white:#fff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,Arial,sans-serif;background:#07090d;color:var(--text);line-height:1.4}
+button,input,select{font:inherit} button{cursor:pointer}
+.screen{display:none;min-height:100vh}.screen.active{display:block}
+.wrap{width:min(1180px,92%);margin:auto}
+
+/* NAV */
+nav{height:76px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;background:#070a0f}
+.brand{font-weight:950;font-size:18px;letter-spacing:-.7px}.brand b{color:var(--red)}
+.navlinks{display:flex;gap:28px}.navlinks button{border:0;background:none;color:#cbd2dc;font-size:12px}
+.navlinks button:hover{color:#fff}
+.navbtn{background:var(--gold);border:0;padding:12px 18px;border-radius:7px;font-weight:900;font-size:11px}
+
+/* HOME / HERO */
+.hero{min-height:610px;position:relative;overflow:hidden;background:
+radial-gradient(circle at 18% 65%,#7e1018 0,transparent 32%),
+radial-gradient(circle at 82% 35%,#400b12 0,transparent 30%),
+linear-gradient(110deg,#090d13,#100b10 55%,#07090d)}
+.hero:before{content:"SPORTS";position:absolute;font-size:clamp(150px,25vw,340px);font-weight:1000;color:#ffffff03;right:-50px;bottom:-65px;line-height:.7}
+.hero-inner{position:relative;z-index:2;padding:92px 0 110px}
+.eyebrow{color:var(--red2);font-size:11px;font-weight:900;letter-spacing:2.2px;text-transform:uppercase}
+.hero h1{font-size:clamp(54px,8vw,105px);line-height:.85;letter-spacing:-6px;max-width:800px;margin:18px 0}
+.hero h1 span{color:var(--gold)}
+.hero p{color:#aab2bf;max-width:510px;font-size:14px}
+.hero-actions{display:flex;gap:12px;margin-top:30px}
+.primary{background:var(--red);color:#fff;border:0;border-radius:7px;padding:15px 22px;font-weight:950;font-size:11px}
+.secondary{background:#ffffff0a;color:#fff;border:1px solid #ffffff20;border-radius:7px;padding:15px 22px;font-weight:850;font-size:11px}
+.hero-stats{display:flex;gap:35px;margin-top:55px}
+.hero-stats strong{font-size:25px;display:block}.hero-stats span{font-size:9px;color:#7e8998;text-transform:uppercase;letter-spacing:1px}
+
+/* SELECTION */
+#sports{background:#090d13;padding-bottom:80px}
+.pagehead{padding:65px 0 35px;display:flex;justify-content:space-between;align-items:end}
+.pagehead h2{font-size:52px;line-height:.9;letter-spacing:-3px}.pagehead p{color:var(--muted);font-size:12px;max-width:350px}
+.sportgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.sport{min-height:300px;background:linear-gradient(145deg,#111822,#0b0f15);border:1px solid var(--line);border-radius:14px;color:#fff;text-align:left;padding:20px;position:relative;overflow:hidden;transition:.25s}
+.sport:hover{transform:translateY(-6px);border-color:#5b2530}
+.sport:after{content:"";position:absolute;width:150px;height:150px;border:1px solid #ff30381c;border-radius:50%;right:-75px;bottom:-70px}
+.sicon{font-size:31px}.sport h3{font-size:22px;margin-top:78px}.sport p{font-size:10px;color:#7e8998;margin-top:4px}
+.open{position:absolute;bottom:19px;left:20px;color:var(--red2);font-size:9px;font-weight:950}
+
+/* TEAM FORM */
+#teamreg{background:#080b10;padding-bottom:80px}
+.form-head{padding:48px 0 30px;display:flex;justify-content:space-between;align-items:center}
+.form-head h2{font-size:46px;letter-spacing:-2px}.form-head small{color:var(--red2);font-size:9px;text-transform:uppercase;letter-spacing:2px}
+.back{background:#fff0;border:1px solid #ffffff20;color:#d6dbe3;border-radius:6px;padding:10px 14px;font-size:10px}
+.teamlayout{display:grid;grid-template-columns:.72fr 1.28fr;gap:16px}
+.info,.formbox{background:var(--panel);border:1px solid var(--line);border-radius:13px}
+.info{padding:28px}.info h3{font-size:31px;letter-spacing:-1.5px}.info h3 span{color:var(--red)}
+.info p{font-size:12px;color:#8d98a7;margin:10px 0 24px}.rules{border-top:1px solid var(--line);padding-top:18px}
+.rule{display:flex;gap:12px;margin:14px 0;font-size:11px;color:#c7cdd5}.badge{min-width:25px;height:25px;border-radius:6px;background:#201116;color:var(--red2);display:grid;place-items:center;font-weight:900}
+.fee{margin-top:25px;background:#131a23;border:1px solid #253140;padding:14px;border-radius:9px}.fee small{color:#7f8a98;font-size:8px}.fee strong{display:block;font-size:25px;color:var(--gold)}
+.formbox{padding:25px}.formbox h3{font-size:24px}.sub{font-size:10px;color:#7e8998;margin:3px 0 20px}
+.game-tabs{display:flex;margin-bottom:20px}.game-tabs button{flex:1;padding:11px;border:1px solid var(--line);background:#101720;color:#8e99a8;font-size:11px}.game-tabs button:first-child{border-radius:7px 0 0 7px}.game-tabs button:last-child{border-radius:0 7px 7px 0}.game-tabs .on{background:var(--red);color:#fff;border-color:var(--red)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:grid;gap:6px;font-size:9px;font-weight:900;color:#cbd1d9;margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
+input,select{background:#0a1017;border:1px solid #263342;color:#fff;border-radius:7px;padding:12px;outline:none;font-size:12px;text-transform:none;letter-spacing:0}
+input:focus,select:focus{border-color:var(--red)}
+.sectiontitle{font-size:11px;font-weight:950;margin:8px 0 11px;color:#fff;text-transform:uppercase;letter-spacing:1px}
+.players{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.player{display:grid;grid-template-columns:30px 1fr;gap:7px;align-items:center}
+.player b{width:30px;height:30px;border-radius:6px;background:#161f2a;display:grid;place-items:center;color:#7d8998;font-size:9px}
+.player input{width:100%}
+.add{border:1px dashed #364353;background:#0a1017;color:#aeb7c2;border-radius:7px;padding:10px;width:100%;margin-top:9px;font-size:10px;font-weight:850}
+.submit{width:100%;margin-top:17px;background:var(--red);color:#fff;border:0;border-radius:7px;padding:14px;font-size:11px;font-weight:950}
+.note{text-align:center;color:#687484;font-size:8px;margin-top:8px}
+
+/* ESPORTS SPECIAL */
+#esports{background:#050609;position:relative;overflow:hidden}
+#esports:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 75% 25%,#6e0a13 0,transparent 28%),radial-gradient(circle at 25% 75%,#35070c 0,transparent 30%);pointer-events:none}
+.eswrap{position:relative;z-index:2}
+.eshero{min-height:530px;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:30px}
+.escopy .eyebrow{color:#ff4249}.eslogo{font-size:12px;letter-spacing:4px;color:#e6e9ee;font-weight:950}
+.escopy h1{font-size:clamp(52px,7vw,90px);line-height:.82;letter-spacing:-5px;margin:14px 0}
+.escopy h1 span{color:var(--red)}
+.escopy p{color:#9aa3ae;max-width:450px;font-size:13px}
+.esbadge{display:inline-block;margin-top:22px;border:1px solid #ff303844;background:#ff30380d;color:#ff6970;padding:9px 12px;border-radius:6px;font-size:9px;font-weight:900}
+.esvisual{height:400px;border-radius:18px;border:1px solid #3a1c21;background:
+linear-gradient(135deg,#161016aa,#07090dcc),
+radial-gradient(circle at 70% 35%,#ff293333,transparent 35%);
+position:relative;display:grid;place-items:center;overflow:hidden}
+.esvisual:before{content:"";width:330px;height:330px;border:1px solid #ff30382d;border-radius:50%;position:absolute}
+.gamepad{font-size:130px;filter:drop-shadow(0 15px 25px #ff303844)}
+.escard{background:#0d1118;border:1px solid #252e3a;border-radius:13px;padding:25px;margin-bottom:50px}
+.esgrid{display:grid;grid-template-columns:1fr 1.1fr;gap:20px}.escard h3{font-size:24px}.escard p{font-size:11px;color:#7f8997;margin:3px 0 18px}
+.esstats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.esstat{background:#111822;padding:13px;border-radius:8px}.esstat small{font-size:8px;color:#7e8997}.esstat strong{display:block;font-size:18px;margin-top:4px}
+.esform .submit{background:var(--red)}
+
+/* SUCCESS */
+#success{background:radial-gradient(circle at center,#25090d,#07090d 60%);display:none;align-items:center;justify-content:center;padding:25px}
+#success.active{display:flex}.successbox{text-align:center;width:min(500px,100%);padding:50px 30px;background:#0e1219;border:1px solid #332127;border-radius:16px}.check{width:68px;height:68px;border-radius:50%;background:var(--red);display:grid;place-items:center;margin:0 auto 20px;font-size:34px}.successbox h2{font-size:42px}.successbox p{color:#8993a0;font-size:12px;margin:10px 0 18px}.regid{background:#151c25;padding:14px;border-radius:7px;font-weight:950;letter-spacing:2px}.successbox button{margin-top:15px}
+
+/* RESPONSIVE */
+@media(max-width:900px){.sportgrid{grid-template-columns:repeat(3,1fr)}.teamlayout,.esgrid{grid-template-columns:1fr}.eshero{grid-template-columns:1fr;padding:65px 0}.esvisual{height:300px}}
+@media(max-width:620px){.navlinks{display:none}.navbtn{padding:10px 12px}.hero-inner{padding:65px 0 90px}.hero h1{font-size:55px;letter-spacing:-4px}.hero-stats{gap:18px}.pagehead{display:block}.pagehead p{margin-top:14px}.sportgrid{grid-template-columns:1fr 1fr}.grid2,.players{grid-template-columns:1fr}.form-head h2{font-size:35px}.escopy h1{font-size:56px}}
+@media(max-width:400px){.sportgrid{grid-template-columns:1fr}.hero-stats{display:grid;grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<!-- HOME -->
+<section id="home" class="screen active">
+<nav><div class="wrap" style="display:flex;align-items:center;justify-content:space-between;width:92%">
+<div class="brand">FRESHERS <b>SPORTS</b> '26</div>
+<div class="navlinks"><button onclick="show('sports')">Sports</button><button onclick="show('esports')">eSports</button><button onclick="show('sports')">Registration</button></div>
+<button class="navbtn" onclick="show('sports')">REGISTER</button></div></nav>
+<div class="hero"><div class="wrap hero-inner">
+<div class="eyebrow">College Freshers · Sports Registration 2026</div>
+<h1>PLAY.<br><span>COMPETE.</span><br>REPRESENT.</h1>
+<p>One team. One campus. One season. Register your freshers team for Kabaddi, Kho-Kho, Volleyball, Cricket or eSports — PUBG Mobile and Free Fire.</p>
+<div class="hero-actions"><button class="primary" onclick="show('sports')">REGISTER YOUR TEAM →</button><button class="secondary" onclick="show('esports')">VIEW eSPORTS</button></div>
+<div class="hero-stats"><div><strong>05</strong><span>Sports</span></div><div><strong>01</strong><span>Team Registration</span></div><div><strong>₹100</strong><span>eSports Only</span></div></div>
+</div></div>
+</section>
+
+<!-- SPORT SELECTION -->
+<section id="sports" class="screen">
+<nav><div class="wrap" style="display:flex;align-items:center;justify-content:space-between;width:92%">
+<div class="brand">FRESHERS <b>SPORTS</b> '26</div><button class="back" onclick="show('home')">← HOME</button></div></nav>
+<div class="wrap">
+<div class="pagehead"><div><div class="eyebrow">Team Registration</div><h2>Choose<br>your sport.</h2></div><p>Each registration is for one team. Select your sport to open the team registration form.</p></div>
+<div class="sportgrid">
+<button class="sport" onclick="openTeam('Kabaddi',7,3)"><div class="sicon">🤼</div><h3>Kabaddi</h3><p>7 players + 3 optional substitutes</p><span class="open">REGISTER TEAM →</span></button>
+<button class="sport" onclick="openTeam('Kho-Kho',9,3)"><div class="sicon">🏃</div><h3>Kho-Kho</h3><p>9 players + 3 optional substitutes</p><span class="open">REGISTER TEAM →</span></button>
+<button class="sport" onclick="openTeam('Volleyball',6,3)"><div class="sicon">🏐</div><h3>Volleyball</h3><p>6 players + 3 optional substitutes</p><span class="open">REGISTER TEAM →</span></button>
+<button class="sport" onclick="openTeam('Cricket',11,5)"><div class="sicon">🏏</div><h3>Cricket</h3><p>11 players + 5 optional substitutes</p><span class="open">REGISTER TEAM →</span></button>
+<button class="sport" onclick="show('esports')"><div class="sicon">🎮</div><h3>eSports</h3><p>PUBG Mobile + Free Fire · ₹100/team</p><span class="open">OPEN eSPORTS →</span></button>
+</div></div>
+</section>
+
+<!-- TEAM SPORTS FORM -->
+<section id="teamreg" class="screen">
+<nav><div class="wrap" style="display:flex;align-items:center;justify-content:space-between;width:92%">
+<div class="brand">FRESHERS <b>SPORTS</b> '26</div><button class="back" onclick="show('sports')">← SPORTS</button></div></nav>
+<div class="wrap">
+<div class="form-head"><div><small id="sportLabel">TEAM REGISTRATION</small><h2 id="sportTitle">Kabaddi</h2></div><button class="back" onclick="show('sports')">CHANGE SPORT</button></div>
+<div class="teamlayout">
+<div class="info"><h3>Build your<br><span>team.</span></h3><p>One form represents one complete team. Enter the captain, required players and optional substitutes.</p>
+<div class="rules"><div class="rule"><span class="badge" id="reqBadge">7</span><span><b id="requiredText">7 players required</b><br>Starting team members</span></div>
+<div class="rule"><span class="badge" id="subBadge">3</span><span><b id="subText">Up to 3 substitutes</b><br>Optional</span></div><div class="rule"><span class="badge">₹0</span><span><b>Registration fee</b><br>Free for outdoor sports</span></div></div>
+<div class="fee"><small>TEAM REGISTRATION</small><strong>FREE</strong></div></div>
+
+<div class="formbox"><h3 id="formHeading">Kabaddi Team Registration</h3><div class="sub">Enter team details, academic details and contact information.</div>
+<form id="teamForm">
+<div class="grid2"><label>Team Name<input required placeholder="Enter team name"></label><label>Captain Name<input required placeholder="Team captain"></label></div>
+<div class="grid2"><label>Year<select required><option value="">Select year</option><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option></select></label><label>Branch<input required placeholder="e.g. CSE"></label></div>
+<div class="grid2"><label>Team Contact Number<input required type="tel" pattern="[0-9]{10}" placeholder="10-digit number"></label><label>Alternate Contact<input type="tel" pattern="[0-9]{10}" placeholder="Optional"></label></div>
+<div class="sectiontitle">Required Players</div><div class="players" id="players"></div>
+<div class="sectiontitle" style="margin-top:18px">Optional Substitutes</div><div class="players" id="subs"></div>
+<button class="submit" type="submit">SUBMIT TEAM REGISTRATION →</button><div class="note">Registration is free for Kabaddi, Kho-Kho, Volleyball and Cricket.</div>
+</form></div></div></div>
+</section>
+
+<!-- ESPORTS -->
+<section id="esports" class="screen">
+<nav><div class="wrap" style="display:flex;align-items:center;justify-content:space-between;width:92%">
+<div class="brand">FRESHERS <b>eSPORTS</b> '26</div><button class="back" onclick="show('home')">← HOME</button></div></nav>
+<div class="wrap eswrap">
+<div class="eshero"><div class="escopy"><div class="eslogo">FRESHERS SPORTS 2026</div><div class="eyebrow" style="margin-top:17px">eSports Championship</div>
+<h1>PLAY<br><span>HARD.</span><br>WIN BIG.</h1><p>Represent your college freshers batch in the eSports arena. Register one team and compete for the championship.</p><div class="esbadge">PUBG MOBILE · FREE FIRE · TEAM REGISTRATION · ₹100</div></div>
+<div class="esvisual"><div class="gamepad">🎮</div></div></div>
+
+<div class="escard"><div class="esgrid"><div><h3>eSports Team Registration</h3><p>Freshers-only registration interface</p>
+<div class="game-tabs">
+<button class="on" id="esGameA" onclick="setEsGame('PUBG Mobile',this)">PUBG MOBILE</button>
+<button id="esGameB" onclick="setEsGame('Free Fire',this)">FREE FIRE</button>
+</div>
+<form id="esForm">
+<input type="hidden" id="esGameValue" value="PUBG Mobile">
+<div class="grid2"><label>Team Name<input required placeholder="Enter team name"></label><label>Captain Name<input required placeholder="Captain name"></label></div>
+<div class="grid2"><label>Year<select required><option value="">Select year</option><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option></select></label><label>Branch<input required placeholder="e.g. CSE"></label></div>
+<div class="grid2"><label>Contact Number<input required type="tel" pattern="[0-9]{10}" placeholder="10-digit number"></label><label>Team ID / Game ID<input required placeholder="Enter team/game ID"></label></div>
+<div class="sectiontitle">Team Members</div><div class="players" id="esplayers"></div>
+<button class="submit" type="submit">PROCEED TO PAY ₹100 →</button><div class="note">eSports registration fee: ₹100 per team.</div></form></div>
+<div><div class="esstats">
+<div class="esstat"><small>GAMES</small><strong>02</strong><span style="display:block;font-size:8px;color:#7e8997;margin-top:3px">PUBG · FREE FIRE</span></div>
+<div class="esstat"><small>FEE / TEAM</small><strong>₹100</strong></div>
+<div class="esstat"><small>ELIGIBILITY</small><strong>FRESHERS</strong></div>
+</div></div></div></div>
+</div></section>
+
+<!-- SUCCESS -->
+<section id="success" class="screen"><div class="successbox"><div class="check">✓</div><h2>Team Registered.</h2><p>Your team registration has been created successfully. Save this registration ID for verification.</p><div class="regid" id="regid">FS26-0000</div><button class="primary" onclick="show('home')">BACK TO HOME</button></div></section>
+
+<script>
+const screens=["home","sports","teamreg","esports","success"];
+function show(id){screens.forEach(x=>document.getElementById(x).classList.toggle("active",x===id));window.scrollTo(0,0)}
+
+let currentSport="",requiredPlayers=0,subPlayers=0;
+function playerInputs(count,prefix,optional=false){
+ let out="";
+ for(let i=1;i<=count;i++) out+=`<label class="player"><b>${i}</b><input ${optional?"":"required"} placeholder="${prefix} ${i}${optional?" (optional)":""}"></label>`;
+ return out;
+}
+function openTeam(sport,req,subs){
+ currentSport=sport;requiredPlayers=req;subPlayers=subs;
+ document.getElementById("sportLabel").textContent=sport.toUpperCase()+" · TEAM REGISTRATION";
+ document.getElementById("sportTitle").textContent=sport;
+ document.getElementById("formHeading").textContent=sport+" Team Registration";
+ document.getElementById("reqBadge").textContent=req;
+ document.getElementById("subBadge").textContent=subs;
+ document.getElementById("requiredText").textContent=req+" players required";
+ document.getElementById("subText").textContent="Up to "+subs+" substitutes";
+ document.getElementById("players").innerHTML=playerInputs(req,"Player");
+ document.getElementById("subs").innerHTML=playerInputs(subs,"Substitute",true);
+ show("teamreg");
+}
+function setEsGame(name,btn){
+ document.querySelectorAll(".game-tabs button").forEach(x=>x.classList.remove("on"));
+ btn.classList.add("on");
+ document.getElementById("selectedEsGame").textContent=name.toUpperCase();
+ document.getElementById("esGameValue").value=name;
+}
+document.getElementById("esplayers").innerHTML=playerInputs(4,"Player");
+
+function finish(formData, isEsports = false){
+ const regId = "FS26-" + Math.floor(1000 + Math.random() * 9000);
+ 
+ const payload = {
+   registrationId: regId,
+   sport: isEsports ? document.getElementById("esGameValue").value : currentSport,
+   teamName: formData.get("teamName"),
+   captainName: formData.get("captainName"),
+   year: formData.get("year"),
+   branch: formData.get("branch"),
+   contactNumber: formData.get("contactNumber"),
+   ...Object.fromEntries(formData)
+ };
+
+ fetch("http://localhost:3000/api/registrations", {
+   method: "POST",
+   headers: { "Content-Type": "application/json" },
+   body: JSON.stringify(payload)
+ })
+ .then(res => res.json())
+ .then(data => {
+   if(data.success) {
+     document.getElementById("regid").textContent = regId;
+     show("success");
+   } else {
+     alert("Error: " + data.message);
+   }
+ })
+ .catch(err => {
+   console.error(err);
+   alert("Failed to connect to the backend server.");
+ });
+}
+
+document.getElementById("teamForm").addEventListener("submit", e => {
+ e.preventDefault();
+ 
+ const inputs = e.target.querySelectorAll("input, select");
+ const formData = new FormData();
+ inputs.forEach(input => {
+   const label = input.closest("label");
+   const key = label ? label.textContent.replace(/\s+/g, "_").toLowerCase() : input.placeholder;
+   formData.append(key, input.value);
+ });
+ 
+ finish(formData, false);
+});
+
+document.getElementById("esForm").addEventListener("submit", e => {
+ e.preventDefault();
+ 
+ const inputs = e.target.querySelectorAll("input, select");
+ const formData = new FormData();
+ inputs.forEach(input => {
+   const label = input.closest("label");
+   const key = label ? label.textContent.replace(/\s+/g, "_").toLowerCase() : input.placeholder;
+   formData.append(key, input.value);
+ });
+ 
+ finish(formData, true);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Details - Admin Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f4f7f6; }
+        h1 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #0056b3; color: white; }
+        tr:hover { background-color: #f1f1f1; }
+        .loading { font-size: 18px; color: #666; }
+    </style>
+</head>
+<body>
+    <h1>Registered Teams Details</h1>
+    <p>Refresh this page to see the latest data.</p>
+    
+    <div id="loading" class="loading">Loading data from backend...</div>
+    
+    <table id="dataTable" style="display:none;">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Registration ID</th>
+                <th>Details (Raw Data)</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+    </table>
+
+    <script>
+        async function fetchRegistrations() {
+            try {
+                const response = await fetch('http://localhost:3000/api/registrations');
+                const result = await response.json();
+                
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('dataTable').style.display = 'table';
+                
+                const tbody = document.getElementById('tableBody');
+                
+                if (result.registrations.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="3">No registrations found yet.</td></tr>';
+                    return;
+                }
+
+                result.registrations.forEach(reg => {
+                    const tr = document.createElement('tr');
+                    
+                    const dateTd = document.createElement('td');
+                    dateTd.textContent = new Date(reg.createdAt).toLocaleString();
+                    
+                    const idTd = document.createElement('td');
+                    idTd.textContent = reg.registrationId || 'N/A';
+                    
+                    const detailsTd = document.createElement('td');
+                    // Removing the internal fields to display the clean data
+                    const { _id, createdAt, registrationId, ...cleanData } = reg;
+                    detailsTd.innerHTML = `<pre style="margin:0; font-size:12px;">${JSON.stringify(cleanData, null, 2)}</pre>`;
+                    
+                    tr.appendChild(dateTd);
+                    tr.appendChild(idTd);
+                    tr.appendChild(detailsTd);
+                    tbody.appendChild(tr);
+                });
+                
+            } catch (error) {
+                document.getElementById('loading').textContent = 'Error loading data. Make sure backend is running.';
+                console.error('Error fetching data:', error);
+            }
+        }
+        
+        fetchRegistrations();
+    </script>
+</body>
+</html>
